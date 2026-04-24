@@ -1,70 +1,168 @@
-\# AI Analytics Lab
+# AI Analytics Lab
 
+This repository documents a hands-on analytics engineering project built using dbt and BigQuery.
+The goal is to demonstrate end-to-end data modeling, transformation, and validation using modern data stack tools.
 
+---
 
-This repository documents my hands-on work in:
+## 🚀 Project Overview
 
-\- Analytics Engineering (dbt)
+This project implements a simple but structured ELT pipeline:
 
-\- Cloud Data Warehousing (BigQuery)
+**Raw Data → Staging → Metrics (Fact Table) → Data Quality Validation**
 
-\- AI-augmented analytics (planned)
+It simulates a transactional dataset and transforms it into business-ready analytics models.
 
+---
 
+## 🏗️ Architecture
 
-\## Status: In Progress (Week 2)
+```
+CSV (local seed)
+   ↓ dbt seed
+BigQuery: orders (raw layer)
+   ↓ dbt run
+BigQuery: stg_orders (staging layer)
+   ↓ dbt run
+BigQuery: fct_revenue (metrics layer)
+```
 
+---
 
+## 📊 Data Model
 
-\## Built So Far
+### 1. Raw Layer
 
+**`orders`**
 
+* Source: CSV seed file
+* Contains transactional order data
 
-\- Set up dbt project
+Columns:
 
-\- Connected to BigQuery
+* order_id
+* customer_id
+* order_date
+* amount
 
-\- Created seed dataset (orders)
+---
 
-\- Built first staging model (stg\_orders)
+### 2. Staging Layer
 
+**`stg_orders`**
 
+* Cleaned and standardized version of raw data
+* Acts as the base for downstream models
 
-\## Data Model
+---
 
+### 3. Metrics Layer (Fact Table)
 
+**`fct_revenue`**
 
-\- `orders` → raw input data
+* Grain: one row per `order_date`
+* Aggregated business metrics
 
-\- `stg\_orders` → cleaned staging layer
+Metrics:
 
+* total_revenue → sum(amount)
+* total_orders → count(order_id)
+* unique_customers → count(distinct customer_id)
 
+---
 
-\## Next Steps
+## 🧪 Data Quality & Testing
 
+Implemented using dbt YAML configuration:
 
+* **not_null test** on `order_date`
+* Ensures critical fields are populated
+* Validated using:
 
-\- Add transformation layer (metrics)
+  ```
+  dbt test
+  ```
 
-\- Build revenue aggregation
+---
 
-\- Introduce AI query layer
+## ⚙️ Tools & Technologies
 
+* dbt (Core) — transformation & modeling
+* BigQuery — cloud data warehouse
+* SQL — data transformations
+* GitHub — version control
 
+---
 
-\## Tech Stack
+## 🔄 How to Run This Project
 
+### 1. Install dependencies
 
+```
+pip install dbt-core dbt-bigquery
+```
 
-\- dbt (Core)
+### 2. Configure dbt profile
 
-\- BigQuery
+Set up `profiles.yml` with BigQuery credentials
 
-\- SQL
+### 3. Load data
 
-\- Python (upcoming)
+```
+dbt seed
+```
 
+### 4. Run models
 
+```
+dbt run
+```
 
-\---
+### 5. Run tests
 
+```
+dbt test
+```
+
+---
+
+## 📈 Current State (Day 3)
+
+✔ dbt project initialized
+✔ Connected to BigQuery
+✔ Seed data loaded
+✔ Staging model created
+✔ Metrics model (fct_revenue) implemented
+✔ Data quality tests added
+
+---
+
+## 🧠 Key Learnings
+
+* Implemented ELT workflow using dbt
+* Understood separation of raw, staging, and metrics layers
+* Built first fact table with business-level aggregation
+* Introduced data validation using YAML-based tests
+* Executed full pipeline in BigQuery
+
+---
+
+## 🔮 Next Steps
+
+* Add dimension tables (e.g., dim_customers)
+* Implement relationships between models
+* Introduce advanced tests (unique, relationships)
+* Improve model structure (star schema)
+* Add AI-assisted querying layer
+
+---
+
+## 📌 Notes
+
+This project is part of a structured upskilling plan focused on:
+
+* Analytics Engineering
+* AI-augmented Data Analytics
+* Cloud-based Data Pipelines
+
+---
