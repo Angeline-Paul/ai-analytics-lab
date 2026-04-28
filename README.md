@@ -9,7 +9,7 @@ The goal is to demonstrate end-to-end data modeling, transformation, and validat
 
 This project implements a simple but structured ELT pipeline:
 
-**Raw Data → Staging → Metrics (Fact Table) → Data Quality Validation**
+**Raw Data → Staging → Metrics (Fact Table) → Dimension (Derived Table) -> Data Quality Validation**
 
 It simulates a transactional dataset and transforms it into business-ready analytics models.
 
@@ -25,6 +25,8 @@ BigQuery: orders (raw layer)
 BigQuery: stg_orders (staging layer)
    ↓ dbt run
 BigQuery: fct_revenue (metrics layer)
+   ↓ dbt run
+BigQuery: dim_customer_metrics (Dimension layer)
 ```
 
 ---
@@ -71,11 +73,27 @@ Metrics:
 
 ---
 
+## 4. Dimension Layer (Derived)
+
+**`dim_customer_metrics`**
+
+* Grain: one row per `customer_id`
+* Derived from transactional data (not master data)
+* Represents customer behavior, not attributes
+
+Metrics:
+
+* total_orders → count(order_id)
+* total_spent → sum(amount)
+* first_order_date → min(order_date)
+* last_order_date → max(order_date)
+
+
 ## 🧪 Data Quality & Testing
 
 Implemented using dbt YAML configuration:
 
-* **not_null test** on `order_date`
+* **not_null test** on `order_date` and `customer_id`
 * Ensures critical fields are populated
 * Validated using:
 
@@ -126,34 +144,47 @@ dbt test
 
 ---
 
-## 📈 Current State (Day 3)
+## 📈 Current State (Day 4)
 
-✔ dbt project initialized
-✔ Connected to BigQuery
-✔ Seed data loaded
-✔ Staging model created
-✔ Metrics model (fct_revenue) implemented
-✔ Data quality tests added
+✔ dbt project initialized and structured  
+✔ Connected to BigQuery and running end-to-end  
+✔ Seed data loaded and validated  
+
+✔ Staging layer implemented (`stg_orders`)  
+✔ Metrics layer implemented (`fct_revenue`)  
+✔ Dimension layer added (`dim_customer_metrics`)  
+
+✔ Data quality tests implemented (YAML-based)  
+✔ Model documentation added (descriptions + grain clarity)  
+
+✔ Basic dimensional modeling introduced  
+   - separation of fact and dimension layers  
+   - clear definition of grain for each model  
+
+✔ Project version-controlled and maintained on GitHub  
 
 ---
 
 ## 🧠 Key Learnings
 
-* Implemented ELT workflow using dbt
-* Understood separation of raw, staging, and metrics layers
-* Built first fact table with business-level aggregation
-* Introduced data validation using YAML-based tests
-* Executed full pipeline in BigQuery
+* Implemented end-to-end ELT workflow using dbt and BigQuery  
+* Applied layered data modeling (raw → staging → marts)  
+* Built fact table (`fct_revenue`) with defined grain and business metrics  
+* Introduced dimension modeling with derived customer metrics (`dim_customer_metrics`)  
+* Understood difference between transactional data, derived dimensions, and master data  
+* Implemented data quality checks using YAML-based tests  
+* Gained clarity on importance of grain in data modeling and its impact on relationships  
 
 ---
 
 ## 🔮 Next Steps
 
-* Add dimension tables (e.g., dim_customers)
-* Implement relationships between models
-* Introduce advanced tests (unique, relationships)
-* Improve model structure (star schema)
-* Add AI-assisted querying layer
+* Introduce true customer dimension (master data)  
+* Establish relationships between fact and dimension tables  
+* Implement advanced tests (unique, relationships, referential integrity)  
+* Refactor models toward star schema design  
+* Optimize materialization strategy (views vs tables)  
+* Introduce AI-assisted querying and analytics layer 
 
 ---
 
