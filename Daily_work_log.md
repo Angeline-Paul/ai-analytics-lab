@@ -70,3 +70,304 @@ $ dbt run
 --
 ### Issues:
 - Path error fixed in dbt_project.yml location
+
+
+---------------------------------------
+
+# Daily Log — Day 2 (dbt + BigQuery Foundation)
+
+## Date
+23 April 2026
+
+---
+
+## Objective
+Build and validate a basic ELT pipeline using dbt and BigQuery.
+
+CSV (local)
+   ↓ dbt seed
+BigQuery: orders
+   ↓ dbt run
+BigQuery: stg_orders
+
+---
+
+## What I Worked On
+
+### 1. Data Setup
+- Created seed dataset (`orders.csv`)
+- Defined simple transactional dataset with order-level data
+
+### 2. dbt Execution
+- Ran `dbt seed` to load raw data into BigQuery
+- Verified data available in `orders` table
+
+### 3. Transformation Layer
+- Created staging model: `stg_orders.sql`
+- Applied basic transformation using dbt ref()
+
+### 4. Pipeline Execution
+- Ran `dbt run`
+- Successfully created staging model in BigQuery
+
+---
+
+Steps:
+
+$ cd /c/Angeline/dbt_project/ai_analytics_lab/ai_analytics_lab
+-----
+$ cd models/example
+
+delete this folder
+------
+Create a new orders.csv file inside seeds folder, with the following table structure:
+order_id,customer_id,order_date,amount
+1,101,2024-01-01,100
+2,102,2024-01-02,200
+3,101,2024-01-03,150
+4,103,2024-01-04,300
+5,104,2024-01-05,250
+
+$ cd seeds/orders.csv
+-----
+send a copy of the file to bigquery
+$ dbt seed
+
+
+output:
+======
+$ dbt seed
+20:04:32  Running with dbt=1.11.8
+20:04:35  Registered adapter: bigquery=1.11.1
+20:04:36  [WARNING]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 1 unused configuration paths:
+- models.ai_analytics_lab.example
+20:04:37  Found 1 seed, 539 macros
+20:04:37
+20:04:37  Concurrency: 1 threads (target='dev')
+20:04:37
+20:04:40  1 of 1 START seed file dbt_dev.orders .......................................... [RUN]
+20:04:47  1 of 1 OK loaded seed file dbt_dev.orders ...................................... [INSERT 5 in 7.02s]
+20:04:47
+20:04:47  Finished running 1 seed in 0 hours 0 minutes and 9.95 seconds (9.95s).
+20:04:47
+20:04:47  Completed successfully
+20:04:47
+20:04:47  Done. PASS=1 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=1
+
+
+Check in bigquery inside ai-analytics-lab project for the table called orders
+----
+
+create a file stg_orders.sql inside models/staging/ folder with below view sql
+select
+    order_id,
+    customer_id,
+    order_date,
+    amount
+from {{ ref('orders') }}
+
+----
+send a copy of this file to create a view in bigquery
+$ dbt run
+
+output
+======
+$ dbt run
+20:10:15  Running with dbt=1.11.8
+20:10:17  Registered adapter: bigquery=1.11.1
+20:10:18  [WARNING]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 1 unused configuration paths:
+- models.ai_analytics_lab.example
+20:10:18  Found 1 seed, 1 model, 539 macros
+20:10:18
+20:10:18  Concurrency: 1 threads (target='dev')
+20:10:18
+20:10:21  1 of 1 START sql view model dbt_dev.stg_orders ................................. [RUN]
+20:10:23  1 of 1 OK created sql view model dbt_dev.stg_orders ............................ [CREATE VIEW (0 processed) in 2.26s]
+20:10:24
+20:10:24  Finished running 1 view model in 0 hours 0 minutes and 5.52 seconds (5.52s).
+20:10:24
+20:10:24  Completed successfully
+20:10:24
+20:10:24  Done. PASS=1 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=1
+
+Check in bigquery to find the stg_orders view
+
+-------
+
+GitHub for the first time set up:
+
+$ git config --global user.name "Angeline-Paul"
+
+$ git config --global user.email "angeline.juliette@gmail.com"
+
+got to git hub and create a new repository called ai-analytics-lab without readme.md.
+create the readme.md file in the local folder.
+from the repository get the git remote command and run it in bash from inside /c/Angeline/dbt_project/ai_analytics_lab/ai_analytics_lab 
+
+$ git remote add origin https://github.com/Angeline-Paul/ai-analytics-lab.git
+
+set up generate token for ai-analytics-lab content-> read and write for 90 days
+then commit the main and original:
+
+$ git branch -M main
+$ git push -u origin main
+
+output:
+=======
+The project is now visible in GitHub.
+
+-----
+## Outcome
+
+A working ELT pipeline:
+
+orders (raw layer) → stg_orders (staging layer)
+
+Both tables successfully created in Google BigQuery.
+
+---
+
+## Tools Used
+
+- dbt (Core)
+- Google BigQuery
+- GitHub
+- SQL
+
+---
+
+## Key Learnings
+
+- dbt seed loads local CSV data into warehouse tables
+- dbt run builds transformation models from staging SQL
+- Importance of separating raw and staging layers
+- First end-to-end pipeline execution successful
+
+---
+
+## Challenges Faced
+
+- Initial confusion around Git/GitHub linking
+- Understanding dbt project structure and execution flow
+
+---
+
+## Next Steps (Day 3)
+
+- Build metrics layer (fct_revenue)
+- Introduce business-level aggregation logic
+- Improve model structure and naming conventions
+
+## Date
+23 April 2026
+=============
+
+orders → stg_orders → fct_revenue → validated
+
+----
+cd /c/Angeline/dbt_project/ai_analytics_lab/ai_analytics_lab
+----
+create a sql file models/marts/fct_revenue.sql
+----
+$ dbt run
+16:56:46  Running with dbt=1.11.8
+16:56:49  Registered adapter: bigquery=1.11.1
+16:56:50  [WARNING]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 1 unused configuration paths:
+- models.ai_analytics_lab.example
+16:56:50  Found 1 seed, 2 models, 539 macros
+16:56:50
+16:56:50  Concurrency: 1 threads (target='dev')
+16:56:50
+16:56:53  1 of 2 START sql view model dbt_dev.stg_orders ................................. [RUN]
+16:56:55  1 of 2 OK created sql view model dbt_dev.stg_orders ............................ [CREATE VIEW (0 processed) in 2.55s]
+16:56:55  2 of 2 START sql view model dbt_dev.fct_revenue ................................ [RUN]
+16:56:58  2 of 2 OK created sql view model dbt_dev.fct_revenue ........................... [CREATE VIEW (0 processed) in 2.16s]
+16:56:58
+16:56:58  Finished running 2 view models in 0 hours 0 minutes and 7.49 seconds (7.49s).
+16:56:58
+16:56:58  Completed successfully
+16:56:58
+16:56:58  Done. PASS=2 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=2
+
+---
+
+check in Bigquery. Validate by querying the new view
+
+
+---
+create YAML file called models/marts/schema.yml
+YAML file contains metadata, documentation and testing
+
+</> YAML file content
+version: 2
+
+models:
+  - name: fct_revenue
+    description: Daily revenue metrics aggregated by order_date
+    columns:
+      - name: order_date
+        description: Date of the order
+        tests:
+          - not_null
+
+      - name: total_revenue
+        description: Total revenue per day
+
+      - name: total_orders
+        description: Number of orders per day
+
+      - name: unique_customers
+        description: Count of unique customers per day
+
+---
+test the data.
+
+$ dbt test
+17:36:10  Running with dbt=1.11.8
+17:36:11  Registered adapter: bigquery=1.11.1
+17:36:13  [WARNING]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 1 unused configuration paths:
+- models.ai_analytics_lab.example
+17:36:13  Found 1 seed, 2 models, 1 test, 539 macros
+17:36:13
+17:36:13  Concurrency: 1 threads (target='dev')
+17:36:13
+17:36:15  1 of 1 START test not_null_fct_revenue_order_date .............................. [RUN]
+17:36:18  1 of 1 PASS not_null_fct_revenue_order_date .................................... [PASS in 3.56s]
+17:36:18
+17:36:18  Finished running 1 test in 0 hours 0 minutes and 5.20 seconds (5.20s).
+17:36:18
+17:36:18  Completed successfully
+17:36:18
+17:36:18  Done. PASS=1 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=1
+
+what testing is done:
+=====================
+
+Example (what dbt actually does behind the scenes)
+
+Your YAML:
+
+- name: order_date
+  tests:
+    - not_null
+
+dbt converts this into something like:
+
+select *
+from fct_revenue
+where order_date is null
+
+If rows exist → ❌ test fails
+If none → ✅ test passes
+
+----
+
+created a structured and presentable readme.md file and moved to GitHub
+
+git add README.md
+git commit -m "Refactor README with structured project documentation"
+git push

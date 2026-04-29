@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: fct_revenue
+    description: Daily revenue metrics aggregated by order_date
+    columns:
+      - name: order_date
+        description: Date of the order
+        tests:
+          - not_null
+
+      - name: total_revenue
+        description: Total revenue per day
+
+      - name: total_orders
+        description: Number of orders per day
+
+      - name: unique_customers
+        description: Count of unique customers per day
+
+  - name: dim_customer_metrics
+    description: Customer-level behavioral metrics derived from orders
+    columns:
+      - name: customer_id
+        tests:
+          - not_null
+          - unique
