@@ -144,7 +144,7 @@ dbt test
 
 ---
 
-## 📈 Current State (Day 4)
+## 📈 Current State (Day 5)
 
 ✔ dbt project initialized and structured  
 ✔ Connected to BigQuery and running end-to-end  
