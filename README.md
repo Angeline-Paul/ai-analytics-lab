@@ -18,15 +18,21 @@ It simulates a transactional dataset and transforms it into business-ready analy
 ## 🏗️ Architecture
 
 ```
-CSV (local seed)
-   ↓ dbt seed
-BigQuery: orders (raw layer)
-   ↓ dbt run
+customers.csv (master/reference seed)
+orders.csv (transactional seed)
+          ↓ dbt seed
+BigQuery: customers (raw master data)
+BigQuery: orders (raw transactional data)
+
+          ↓ dbt run
+
+BigQuery: dim_customers (master dimension)
 BigQuery: stg_orders (staging layer)
-   ↓ dbt run
-BigQuery: fct_revenue (metrics layer)
-   ↓ dbt run
-BigQuery: dim_customer_metrics (Dimension layer)
+
+          ↓ dbt run
+
+BigQuery: fct_revenue (fact/metrics layer)
+BigQuery: dim_customer_metrics (derived dimension layer)
 ```
 
 ---
