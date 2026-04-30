@@ -25,3 +25,20 @@ models:
         tests:
           - not_null
           - unique
+
+  - name: dim_customers
+    description: Master customer dimension
+    columns:
+      - name: customer_id
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_orders
+    columns:
+      - name: customer_id
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_id

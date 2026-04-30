@@ -88,6 +88,19 @@ Metrics:
 * first_order_date → min(order_date)
 * last_order_date → max(order_date)
 
+### 5. Master Dimension Layer
+
+**`dim_customers`**
+
+* Grain: one row per `customer_id`
+* Master customer reference data
+
+Columns:
+
+* customer_id
+* customer_name
+* city
+* country
 
 ## 🧪 Data Quality & Testing
 
@@ -146,22 +159,35 @@ dbt test
 
 ## 📈 Current State (Day 5)
 
-✔ dbt project initialized and structured  
-✔ Connected to BigQuery and running end-to-end  
-✔ Seed data loaded and validated  
+✔ dbt project structured into raw, staging, and marts layers  
+✔ Connected to BigQuery with end-to-end pipeline execution  
 
-✔ Staging layer implemented (`stg_orders`)  
-✔ Metrics layer implemented (`fct_revenue`)  
-✔ Dimension layer added (`dim_customer_metrics`)  
+✔ Seed-based source datasets implemented  
+   - `orders` (transactional data)  
+   - `customers` (master/reference data)  
 
-✔ Data quality tests implemented (YAML-based)  
-✔ Model documentation added (descriptions + grain clarity)  
+✔ Staging layer implemented  
+   - `stg_orders` standardizes transactional order data  
 
-✔ Basic dimensional modeling introduced  
+✔ Fact layer implemented  
+   - `fct_revenue` provides daily aggregated business metrics  
+
+✔ Dimension layers implemented  
+   - `dim_customers` → master customer dimension  
+   - `dim_customer_metrics` → derived behavioral customer metrics  
+
+✔ Data quality and governance tests implemented  
+   - `not_null` tests  
+   - `unique` tests  
+   - `relationships` tests (referential integrity)  
+
+✔ Introduced dimensional modeling concepts  
    - separation of fact and dimension layers  
-   - clear definition of grain for each model  
+   - distinction between master and derived dimensions  
+   - model grain definition and governance thinking  
 
 ✔ Project version-controlled and maintained on GitHub  
+✔ README documentation continuously refined with modeling explanations  
 
 ---
 
