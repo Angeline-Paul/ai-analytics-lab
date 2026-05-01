@@ -42,3 +42,10 @@ models:
               arguments:
                 to: ref('dim_customers')
                 field: customer_id
+
+  - name: fct_customer_kpis
+    description: Customer-level KPI metrics
+    columns:
+      - name: customer_id
+        tests:
+          - not_null

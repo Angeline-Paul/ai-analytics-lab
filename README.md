@@ -18,21 +18,28 @@ It simulates a transactional dataset and transforms it into business-ready analy
 ## 🏗️ Architecture
 
 ```
-customers.csv (master/reference seed)
-orders.csv (transactional seed)
-          ↓ dbt seed
-BigQuery: customers (raw master data)
-BigQuery: orders (raw transactional data)
+customers.csv
+orders.csv
+        ↓ dbt seed
 
-          ↓ dbt run
+BigQuery Raw Layer
+- customers
+- orders
 
-BigQuery: dim_customers (master dimension)
-BigQuery: stg_orders (staging layer)
+        ↓ dbt run
 
-          ↓ dbt run
+BigQuery Staging Layer
+- stg_orders (VIEW)
 
-BigQuery: fct_revenue (fact/metrics layer)
-BigQuery: dim_customer_metrics (derived dimension layer)
+        ↓ dbt run
+
+BigQuery Dimension Layer
+- dim_customers (TABLE)
+- dim_customer_metrics (TABLE)
+
+BigQuery Fact Layer
+- fct_revenue (TABLE)
+- fct_customer_kpis (TABLE)
 ```
 
 ---
@@ -79,7 +86,7 @@ Metrics:
 
 ---
 
-## 4. Dimension Layer (Derived)
+### 4. Dimension Layer (Derived)
 
 **`dim_customer_metrics`**
 
@@ -163,7 +170,7 @@ dbt test
 
 ---
 
-## 📈 Current State (Day 5)
+## 📈 Current State (Day 6)
 
 ✔ dbt project structured into raw, staging, and marts layers  
 ✔ Connected to BigQuery with end-to-end pipeline execution  
