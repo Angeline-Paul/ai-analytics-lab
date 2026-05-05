@@ -20,6 +20,7 @@ It simulates a transactional dataset and transforms it into business-ready analy
 ```
 customers.csv
 orders.csv
+
         ↓ dbt seed
 
 BigQuery Raw Layer
@@ -40,6 +41,11 @@ BigQuery Dimension Layer
 BigQuery Fact Layer
 - fct_revenue (TABLE)
 - fct_customer_kpis (TABLE)
+
+        ↓ dbt run
+
+BigQuery Semantic Analytics Layer
+- customer_segments (TABLE)
 ```
 
 ---
@@ -114,6 +120,19 @@ Columns:
 * customer_name
 * city
 * country
+
+### 6. Semantic Analytics Layer
+
+**`customer_segments`**
+
+* Grain: one row per `customer_id`
+* Customer categorization model based on spending behavior
+
+Logic:
+
+* High Value → lifetime_value >= 500
+* Medium Value → lifetime_value >= 200
+* Low Value → lifetime_value < 200
 
 ## 🧪 Data Quality & Testing
 

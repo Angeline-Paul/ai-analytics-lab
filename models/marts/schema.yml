@@ -49,3 +49,11 @@ models:
       - name: customer_id
         tests:
           - not_null
+
+  - name: customer_segments
+    description: Customer segmentation analytics model
+    columns:
+      - name: customer_id
+        tests:
+          - not_null
+          - unique
