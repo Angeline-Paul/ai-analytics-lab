@@ -189,60 +189,82 @@ dbt test
 
 ---
 
-## 📈 Current State (Day 6)
+## 📈 Current State (Day 7)
 
-✔ dbt project structured into raw, staging, and marts layers  
-✔ Connected to BigQuery with end-to-end pipeline execution  
+✔ Cloud-native analytics engineering project implemented using dbt and BigQuery  
 
-✔ Seed-based source datasets implemented  
-   - `orders` (transactional data)  
-   - `customers` (master/reference data)  
+✔ Layered warehouse architecture established  
+   - Raw Layer  
+   - Staging Layer  
+   - Dimension Layer  
+   - Fact Layer  
+   - Semantic Analytics Layer  
+
+✔ Seed-based source ingestion implemented  
+   - `orders.csv` → transactional source data  
+   - `customers.csv` → master/reference source data  
 
 ✔ Staging layer implemented  
-   - `stg_orders` standardizes transactional order data  
+   - `stg_orders` standardizes and prepares transactional data for downstream modeling  
 
-✔ Fact layer implemented  
-   - `fct_revenue` provides daily aggregated business metrics  
-
-✔ Dimension layers implemented  
+✔ Dimension models implemented  
    - `dim_customers` → master customer dimension  
    - `dim_customer_metrics` → derived behavioral customer metrics  
 
-✔ Data quality and governance tests implemented  
+✔ Fact models implemented  
+   - `fct_revenue` → daily aggregated revenue metrics  
+   - `fct_customer_kpis` → customer-level KPI aggregation model  
+
+✔ Semantic analytics layer implemented  
+   - `customer_segments` categorizes customers into business segments  
+   - segmentation based on customer lifetime value logic  
+
+✔ Materialization strategy introduced  
+   - staging models materialized as `VIEW`
+   - marts/facts/dimensions materialized as `TABLE`
+
+✔ Data governance and testing implemented  
    - `not_null` tests  
    - `unique` tests  
-   - `relationships` tests (referential integrity)  
+   - `relationships` tests for referential integrity  
 
-✔ Introduced dimensional modeling concepts  
-   - separation of fact and dimension layers  
-   - distinction between master and derived dimensions  
-   - model grain definition and governance thinking  
+✔ Warehouse-oriented modeling concepts introduced  
+   - dimensional modeling  
+   - fact vs dimension separation  
+   - master vs derived dimensions  
+   - semantic analytics modeling  
+   - KPI engineering  
 
-✔ Project version-controlled and maintained on GitHub  
-✔ README documentation continuously refined with modeling explanations  
+✔ Project fully version-controlled and maintained on GitHub  
+✔ README continuously refined with architecture and modeling documentation
 
 ---
 
 ## 🧠 Key Learnings
 
-* Implemented end-to-end ELT workflow using dbt and BigQuery  
-* Applied layered data modeling (raw → staging → marts)  
-* Built fact table (`fct_revenue`) with defined grain and business metrics  
-* Introduced dimension modeling with derived customer metrics (`dim_customer_metrics`)  
-* Understood difference between transactional data, derived dimensions, and master data  
-* Implemented data quality checks using YAML-based tests  
-* Gained clarity on importance of grain in data modeling and its impact on relationships  
+* Implemented layered analytics engineering architecture using dbt and BigQuery
+* Created the distinction between raw, staging, fact, dimension, and semantic analytics layers
+* Built customer-centric KPI models using aggregation logic
+* Introduced semantic business categorization through customer segmentation
+* Refreshed dimensional modeling concepts including grain definition and relationship design
+* Implemented warehouse optimization concepts using materialization strategies
+* Applied data governance practices using YAML-based dbt tests
+* Implemented referential integrity validation between transactional and master datasets
+* Improved understanding of analytics engineering workflows and modern warehouse architecture
+* Strengthened Git, GitHub, and repository management practices for portfolio development 
 
 ---
 
 ## 🔮 Next Steps
 
-* Introduce true customer dimension (master data)  
-* Establish relationships between fact and dimension tables  
-* Implement advanced tests (unique, relationships, referential integrity)  
-* Refactor models toward star schema design  
-* Optimize materialization strategy (views vs tables)  
-* Introduce AI-assisted querying and analytics layer 
+* Introduce AI-augmented analytics engineering concepts
+* Implement semantic business metric documentation
+* Generate automated lineage and metadata documentation using dbt docs
+* Enhance YAML model descriptions for AI-readable analytics metadata
+* Prepare project structure for natural language analytics workflows
+* Add architecture visuals and lineage screenshots to GitHub README
+* Introduce future AI analytics use-case planning and semantic querying concepts
+* Strengthen project positioning as an AI-ready analytics engineering platform
 
 ---
 
