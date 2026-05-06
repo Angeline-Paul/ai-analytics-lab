@@ -47,6 +47,14 @@ BigQuery Fact Layer
 BigQuery Semantic Analytics Layer
 - customer_segments (TABLE)
 ```
+---
+
+## ⚙️ Tools & Technologies
+
+* dbt (Core) — transformation & modeling
+* BigQuery — cloud data warehouse
+* SQL — data transformations
+* GitHub — version control
 
 ---
 
@@ -148,12 +156,18 @@ Implemented using dbt YAML configuration:
 
 ---
 
-## ⚙️ Tools & Technologies
+## 🤖 AI-Augmented Analytics Engineering Features
 
-* dbt (Core) — transformation & modeling
-* BigQuery — cloud data warehouse
-* SQL — data transformations
-* GitHub — version control
+This project incorporates AI-ready analytics engineering concepts:
+
+- Semantic business metric definitions
+- YAML-based metadata documentation
+- Automated lineage generation using dbt docs
+- Standardized KPI modeling
+- Analytics-ready dimensional architecture
+- Business-context-aware semantic models
+
+The project is structured to support future AI-assisted querying and semantic analytics workflows.
 
 ---
 

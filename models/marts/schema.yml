@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fct_revenue
-    description: Daily revenue metrics aggregated by order_date
+    description: Daily revenue fact table containing Daily revenue metrics aggregated by order_date
     columns:
       - name: order_date
         description: Date of the order
@@ -44,14 +44,14 @@ models:
                 field: customer_id
 
   - name: fct_customer_kpis
-    description: Customer-level KPI metrics
+    description: Customer-level KPI aggregation model containing lifetime value and order behavior metrics
     columns:
       - name: customer_id
         tests:
           - not_null
 
   - name: customer_segments
-    description: Customer segmentation analytics model
+    description: Semantic customer categorization model
     columns:
       - name: customer_id
         tests:
