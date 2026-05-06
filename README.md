@@ -153,6 +153,17 @@ Implemented using dbt YAML configuration:
   ```
   dbt test
   ```
+---
+
+## 📊 dbt Lineage Graph
+
+![Lineage](assets/full_project_dag.png)
+
+---
+
+## 🧠 Model Documentation
+
+![Model Docs](assets/model_documentation.png)
 
 ---
 
