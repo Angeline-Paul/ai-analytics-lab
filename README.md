@@ -237,20 +237,20 @@ dbt test
 
 ## 📈 Current State (Day 8)
 
-✔ dbt project fully connected to BigQuery
-✔ Seed-based raw ingestion layer implemented
-✔ Staging transformations implemented using dbt models
-✔ Fact tables created for revenue and customer KPIs
-✔ Dimension tables implemented for customer analytics
-✔ Customer segmentation semantic model created
-✔ YAML-based testing and governance implemented
-✔ dbt documentation site generated
-✔ Lineage DAG successfully visualized
-✔ Model metadata and documentation added
-✔ Analytics engineering architecture established
-✔ Semantic analytics structure introduced
-✔ AI-ready analytics project organization implemented
-✔ Project screenshots and architecture evidence captured
+* dbt project fully connected to BigQuery
+* Seed-based raw ingestion layer implemented
+* Staging transformations implemented using dbt models
+* Fact tables created for revenue and customer KPIs
+* Dimension tables implemented for customer analytics
+* Customer segmentation semantic model created
+* YAML-based testing and governance implemented
+* dbt documentation site generated
+* Lineage DAG successfully visualized
+* Model metadata and documentation added
+* Analytics engineering architecture established
+* Semantic analytics structure introduced
+* AI-ready analytics project organization implemented
+* Project screenshots and architecture evidence captured
 ---
 
 ## 🧠 Key Learnings
