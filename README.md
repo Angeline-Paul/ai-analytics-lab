@@ -15,38 +15,42 @@ It simulates a transactional dataset and transforms it into business-ready analy
 
 ---
 
-## 🏗️ Architecture
+## 🏗️ Analytics Engineering Architecture
 
 ```
-customers.csv
-orders.csv
-
-        ↓ dbt seed
-
+CSV Seeds (Local Files)
+        ↓
+dbt seed
+        ↓
 BigQuery Raw Layer
-- customers
-- orders
-
-        ↓ dbt run
-
-BigQuery Staging Layer
-- stg_orders (VIEW)
-
-        ↓ dbt run
-
-BigQuery Dimension Layer
-- dim_customers (TABLE)
-- dim_customer_metrics (TABLE)
-
-BigQuery Fact Layer
-- fct_revenue (TABLE)
-- fct_customer_kpis (TABLE)
-
-        ↓ dbt run
-
-BigQuery Semantic Analytics Layer
-- customer_segments (TABLE)
+(orders, customers)
+        ↓
+dbt run
+        ↓
+Staging Layer
+(stg_orders)
+        ↓
+dbt run
+        ↓
+Fact & KPI Layer
+(fct_revenue, fct_customer_kpis)
+        ↓
+dbt run
+        ↓
+Dimension Layer
+(dim_customers, dim_customer_metrics)
+        ↓
+dbt run
+        ↓
+Semantic Analytics Layer
+(customer_segments)
+        ↓
+dbt docs generate
+        ↓
+Metadata + Lineage Layer
+(manifest.json, catalog.json, DAG)
 ```
+
 ---
 
 ## ⚙️ Tools & Technologies
@@ -74,7 +78,6 @@ Columns:
 * order_date
 * amount
 
----
 
 ### 2. Staging Layer
 
@@ -83,7 +86,6 @@ Columns:
 * Cleaned and standardized version of raw data
 * Acts as the base for downstream models
 
----
 
 ### 3. Metrics Layer (Fact Table)
 
@@ -98,7 +100,6 @@ Metrics:
 * total_orders → count(order_id)
 * unique_customers → count(distinct customer_id)
 
----
 
 ### 4. Dimension Layer (Derived)
 
@@ -115,6 +116,7 @@ Metrics:
 * first_order_date → min(order_date)
 * last_order_date → max(order_date)
 
+
 ### 5. Master Dimension Layer
 
 **`dim_customers`**
@@ -129,6 +131,7 @@ Columns:
 * city
 * country
 
+
 ### 6. Semantic Analytics Layer
 
 **`customer_segments`**
@@ -142,6 +145,8 @@ Logic:
 * Medium Value → lifetime_value >= 200
 * Low Value → lifetime_value < 200
 
+---
+
 ## 🧪 Data Quality & Testing
 
 Implemented using dbt YAML configuration:
@@ -153,6 +158,22 @@ Implemented using dbt YAML configuration:
   ```
   dbt test
   ```
+---
+
+## 📚 Generated Analytics Documentation
+
+The project uses dbt Docs to generate:
+- interactive lineage DAGs
+- metadata catalogs
+- model documentation
+- dependency visualization
+- semantic analytics documentation
+
+Generated artifacts:
+- manifest.json
+- catalog.json
+- compiled SQL metadata
+
 ---
 
 ## 📊 dbt Lineage Graph
@@ -214,82 +235,49 @@ dbt test
 
 ---
 
-## 📈 Current State (Day 7)
+## 📈 Current State (Day 8)
 
-✔ Cloud-native analytics engineering project implemented using dbt and BigQuery  
-
-✔ Layered warehouse architecture established  
-   - Raw Layer  
-   - Staging Layer  
-   - Dimension Layer  
-   - Fact Layer  
-   - Semantic Analytics Layer  
-
-✔ Seed-based source ingestion implemented  
-   - `orders.csv` → transactional source data  
-   - `customers.csv` → master/reference source data  
-
-✔ Staging layer implemented  
-   - `stg_orders` standardizes and prepares transactional data for downstream modeling  
-
-✔ Dimension models implemented  
-   - `dim_customers` → master customer dimension  
-   - `dim_customer_metrics` → derived behavioral customer metrics  
-
-✔ Fact models implemented  
-   - `fct_revenue` → daily aggregated revenue metrics  
-   - `fct_customer_kpis` → customer-level KPI aggregation model  
-
-✔ Semantic analytics layer implemented  
-   - `customer_segments` categorizes customers into business segments  
-   - segmentation based on customer lifetime value logic  
-
-✔ Materialization strategy introduced  
-   - staging models materialized as `VIEW`
-   - marts/facts/dimensions materialized as `TABLE`
-
-✔ Data governance and testing implemented  
-   - `not_null` tests  
-   - `unique` tests  
-   - `relationships` tests for referential integrity  
-
-✔ Warehouse-oriented modeling concepts introduced  
-   - dimensional modeling  
-   - fact vs dimension separation  
-   - master vs derived dimensions  
-   - semantic analytics modeling  
-   - KPI engineering  
-
-✔ Project fully version-controlled and maintained on GitHub  
-✔ README continuously refined with architecture and modeling documentation
-
+✔ dbt project fully connected to BigQuery
+✔ Seed-based raw ingestion layer implemented
+✔ Staging transformations implemented using dbt models
+✔ Fact tables created for revenue and customer KPIs
+✔ Dimension tables implemented for customer analytics
+✔ Customer segmentation semantic model created
+✔ YAML-based testing and governance implemented
+✔ dbt documentation site generated
+✔ Lineage DAG successfully visualized
+✔ Model metadata and documentation added
+✔ Analytics engineering architecture established
+✔ Semantic analytics structure introduced
+✔ AI-ready analytics project organization implemented
+✔ Project screenshots and architecture evidence captured
 ---
 
 ## 🧠 Key Learnings
 
-* Implemented layered analytics engineering architecture using dbt and BigQuery
-* Created the distinction between raw, staging, fact, dimension, and semantic analytics layers
-* Built customer-centric KPI models using aggregation logic
-* Introduced semantic business categorization through customer segmentation
-* Refreshed dimensional modeling concepts including grain definition and relationship design
-* Implemented warehouse optimization concepts using materialization strategies
-* Applied data governance practices using YAML-based dbt tests
-* Implemented referential integrity validation between transactional and master datasets
-* Improved understanding of analytics engineering workflows and modern warehouse architecture
-* Strengthened Git, GitHub, and repository management practices for portfolio development 
+* Understood how dbt generates machine-readable metadata artifacts
+* Learned the role of manifest.json and catalog.json in analytics engineering
+* Built lineage-aware analytics transformations using dbt refs
+* Implemented semantic business modeling concepts
+* Understood the importance of governed analytics metadata
+* Generated interactive dbt documentation and lineage DAGs
+* Learned how analytics engineering supports AI-assisted querying
+* Structured project documentation using assets and docs folders
+* Introduced portfolio-grade analytics architecture organization
+* Learned how modern AI analytics systems leverage semantic metadata layers
 
 ---
 
 ## 🔮 Next Steps
 
-* Introduce AI-augmented analytics engineering concepts
-* Implement semantic business metric documentation
-* Generate automated lineage and metadata documentation using dbt docs
-* Enhance YAML model descriptions for AI-readable analytics metadata
-* Prepare project structure for natural language analytics workflows
-* Add architecture visuals and lineage screenshots to GitHub README
-* Introduce future AI analytics use-case planning and semantic querying concepts
-* Strengthen project positioning as an AI-ready analytics engineering platform
+* Introduce natural language analytics querying concepts
+* Simulate AI-generated SQL workflows
+* Build semantic query examples for business users
+* Add conversational analytics architecture concepts
+* Expand semantic metadata descriptions
+* Introduce AI-assisted analytics engineering patterns
+* Prepare project for production-style deployment concepts
+* Introduce orchestration and CI/CD analytics workflows
 
 ---
 
@@ -300,5 +288,3 @@ This project is part of a structured upskilling plan focused on:
 * Analytics Engineering
 * AI-augmented Data Analytics
 * Cloud-based Data Pipelines
-
----
