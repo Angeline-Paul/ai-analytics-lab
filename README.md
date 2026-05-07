@@ -20,32 +20,32 @@ It simulates a transactional dataset and transforms it into business-ready analy
 ```
 CSV Seeds (Local Files)
         ↓
-dbt seed
+     dbt seed
         ↓
 BigQuery Raw Layer
 (orders, customers)
         ↓
-dbt run
+     dbt run
         ↓
 Staging Layer
 (stg_orders)
         ↓
-dbt run
+     dbt run
         ↓
 Fact & KPI Layer
 (fct_revenue, fct_customer_kpis)
         ↓
-dbt run
+     dbt run
         ↓
 Dimension Layer
 (dim_customers, dim_customer_metrics)
         ↓
-dbt run
+     dbt run
         ↓
 Semantic Analytics Layer
 (customer_segments)
         ↓
-dbt docs generate
+ dbt docs generate
         ↓
 Metadata + Lineage Layer
 (manifest.json, catalog.json, DAG)
