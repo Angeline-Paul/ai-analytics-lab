@@ -15,6 +15,25 @@ It simulates a transactional dataset and transforms it into business-ready analy
 
 ---
 
+## 🤖 Natural Language Analytics Architecture
+
+```
+Business User
+      ↓
+Natural Language Question
+      ↓
+Semantic Analytics Layer
+      ↓
+Metric Definitions + Business Rules
+      ↓
+SQL Mapping
+      ↓
+BigQuery Models
+      ↓
+Business Insight
+```
+---
+
 ## 🏗️ Analytics Engineering Architecture
 
 ```
@@ -52,6 +71,7 @@ Metadata + Lineage Layer
 ```
 
 ---
+
 
 ## ⚙️ Tools & Technologies
 
@@ -145,6 +165,21 @@ Logic:
 * Medium Value → lifetime_value >= 200
 * Low Value → lifetime_value < 200
 
+
+### 7. Semantic Documentation Layer
+
+**`docs/semantic_layer/`**
+
+* Contains business-readable analytics definitions
+* Maps business questions to trusted dbt models
+* Supports future natural-language-to-SQL workflows
+
+Files:
+
+* `business_questions.md` → catalog of business questions
+* `metric_definitions.md` → governed metric definitions
+* `metric_to_sql_mapping.md` → examples of business questions mapped to SQL
+
 ---
 
 ## 🧪 Data Quality & Testing
@@ -203,6 +238,20 @@ The project is structured to support future AI-assisted querying and semantic an
 
 ---
 
+## 🧠 Semantic Analytics Layer
+
+This project includes a semantic analytics layer that bridges business language and warehouse queries.
+
+The semantic layer includes:
+
+* Business question catalog
+* KPI and metric definitions
+* Metric-to-SQL mappings
+* AI-ready business context
+
+This layer demonstrates how analytics systems can translate business questions into governed SQL queries using curated dbt models.
+
+---
 ## 🔄 How to Run This Project
 
 ### 1. Install dependencies
@@ -235,49 +284,40 @@ dbt test
 
 ---
 
-## 📈 Current State (Day 8)
+## 📈 Current State (Day 9)
 
 * dbt project fully connected to BigQuery
-* Seed-based raw ingestion layer implemented
-* Staging transformations implemented using dbt models
-* Fact tables created for revenue and customer KPIs
-* Dimension tables implemented for customer analytics
+* Raw, staging, fact, dimension, and semantic analytics layers implemented
 * Customer segmentation semantic model created
-* YAML-based testing and governance implemented
-* dbt documentation site generated
-* Lineage DAG successfully visualized
+* dbt docs and lineage DAG generated
 * Model metadata and documentation added
-* Analytics engineering architecture established
-* Semantic analytics structure introduced
-* AI-ready analytics project organization implemented
-* Project screenshots and architecture evidence captured
+* Semantic analytics documentation layer introduced
+* Business question catalog created
+* Metric definitions documented
+* Metric-to-SQL mappings added
+* Project prepared for future natural-language analytics and AI-to-SQL workflows
 ---
 
 ## 🧠 Key Learnings
 
-* Understood how dbt generates machine-readable metadata artifacts
-* Learned the role of manifest.json and catalog.json in analytics engineering
-* Built lineage-aware analytics transformations using dbt refs
-* Implemented semantic business modeling concepts
-* Understood the importance of governed analytics metadata
-* Generated interactive dbt documentation and lineage DAGs
-* Learned how analytics engineering supports AI-assisted querying
-* Structured project documentation using assets and docs folders
-* Introduced portfolio-grade analytics architecture organization
-* Learned how modern AI analytics systems leverage semantic metadata layers
+* Understood how semantic layers bridge business language and warehouse models
+* Learned how business questions can be mapped to governed SQL queries
+* Created AI-ready metric definitions and business context
+* Understood why AI-to-SQL requires trusted metadata, not just raw tables
+* Learned how dbt models, YAML metadata, docs, and semantic definitions support AI-assisted analytics
+* Strengthened understanding of governed analytics architecture for future AI workflows
 
 ---
 
 ## 🔮 Next Steps
 
-* Introduce natural language analytics querying concepts
-* Simulate AI-generated SQL workflows
-* Build semantic query examples for business users
-* Add conversational analytics architecture concepts
-* Expand semantic metadata descriptions
-* Introduce AI-assisted analytics engineering patterns
-* Prepare project for production-style deployment concepts
-* Introduce orchestration and CI/CD analytics workflows
+* Build a real natural-language-to-SQL prototype
+* Connect Python to BigQuery
+* Introduce OpenAI or Gemini API for SQL generation
+* Add SQL validation before execution
+* Generate business-friendly insight summaries from query results
+* Add controlled autonomous analytics use case
+* Introduce monitoring, anomaly detection, and AI-generated executive summaries
 
 ---
 
