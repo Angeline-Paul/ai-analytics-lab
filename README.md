@@ -224,6 +224,27 @@ Operational assets:
 
 ---
 
+## 📊 Observability & Monitoring
+
+The platform includes foundational observability concepts designed to improve trust, reliability, and operational visibility.
+
+### Monitoring Capabilities
+
+* Data freshness monitoring
+* Data quality validation
+* KPI reconciliation checks
+* SLA tracking
+* Anomaly detection concepts
+
+### Observability Assets
+
+* `observability/data_freshness.md`
+* `observability/data_quality_monitoring.md`
+* `observability/anomaly_detection.md`
+* `observability/sla_definitions.md`
+
+---
+
 ## 📊 Data Model
 
 ### 1. Raw Layer

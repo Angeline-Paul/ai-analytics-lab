@@ -11,23 +11,30 @@ dbt run
       ↓
 dbt test
       ↓
-dbt docs generate
+Freshness Validation
+      ↓
+Data Quality Monitoring
+      ↓
+Documentation Generation
       ↓
 Notification
 ```
 
 ## Future Orchestration Platforms
 
-- Apache Airflow
-- Microsoft Fabric Pipelines
-- dbt Cloud Jobs
-- Azure Data Factory
+* Apache Airflow
+* Microsoft Fabric Pipelines
+* dbt Cloud Jobs
+* Azure Data Factory
 
 ## Operational Objectives
 
-- Automated execution
-- Data quality validation
-- Documentation generation
-- Failure notification
-- SLA compliance
+* Automated execution
+* Data quality validation
+* Freshness monitoring
+* Documentation generation
+* Failure notification
+* SLA compliance
+
+```
 ```
