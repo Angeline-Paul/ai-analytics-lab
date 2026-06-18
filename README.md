@@ -365,7 +365,7 @@ order by lifetime_value desc
 
 Results:
 
-```text
+```
 | Customer ID | Lifetime Value |
 | ----------- | -------------- |
 | 103         | 300            |
