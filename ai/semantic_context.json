@@ -1,0 +1,22 @@
+{
+  "available_models": {
+    "fct_revenue": {
+      "description": "Daily revenue metrics",
+      "columns": ["order_date", "total_revenue", "total_orders", "unique_customers"]
+    },
+    "fct_customer_kpis": {
+      "description": "Customer-level KPI metrics",
+      "columns": ["customer_id", "total_orders", "lifetime_value", "avg_order_value", "first_order_date", "last_order_date"]
+    },
+    "customer_segments": {
+      "description": "Customer segmentation model",
+      "columns": ["customer_id", "total_orders", "lifetime_value", "customer_segment"]
+    }
+  },
+  "rules": [
+    "Only query models in the dbt_dev dataset",
+    "Use BigQuery SQL syntax",
+    "Do not query raw seed tables unless required",
+    "Prefer curated fact and semantic models"
+  ]
+}
