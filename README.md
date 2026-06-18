@@ -117,7 +117,22 @@ Business Users
 
 ---
 
-## 🤖 Natural Language Analytics Architecture
+## 📸 Platform Screenshots
+
+### Analytics Lineage DAG
+
+![Lineage](assets/full_project_dag.png)
+
+### Model Documentation
+
+![Model Docs](assets/model_documentation.png)
+
+### AI Analytics Assistant
+
+![AI Analytics Demo](assets/nl_to_sql_execution_screen.png)
+
+---
+## 🧠 Semantic Analytics Architecture
 
 ```
 Business User
@@ -308,6 +323,13 @@ BigQuery Execution
 Results Returned
 ```
 
+### Working Execution
+
+The Natural Language Analytics Assistant successfully converts business questions into SQL and executes them directly against BigQuery using governed analytics models.
+
+![AI Analytics Demo](assets/nl_to_sql_execution_screen.png)
+
+
 ### Components
 
 - `ai/nl_to_sql.py`
@@ -323,9 +345,9 @@ Examples:
 - Show daily revenue trend
 - Show high value customers
 
-### Example Output
+### Example Analytics Query
 
-Question:
+Business Question:
 
 ```text
 Which customers have the highest lifetime value?
@@ -344,10 +366,13 @@ order by lifetime_value desc
 Results:
 
 ```text
-Customer 103 → Lifetime Value = 300
-Customer 104 → Lifetime Value = 250
-Customer 101 → Lifetime Value = 250
-Customer 102 → Lifetime Value = 200
+| Customer ID | Lifetime Value |
+| ----------- | -------------- |
+| 103         | 300            |
+| 104         | 250            |
+| 101         | 250            |
+| 102         | 200            |
+
 ```
 
 ### Current Capabilities
